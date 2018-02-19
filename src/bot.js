@@ -11,18 +11,50 @@ const language = {
 	nb: require('../languages/nb.js')
 };
 
-console.log(language);
+const logLevel = process.env.LOG_LEVEL || 'verbose';
+const requiredConfidenceLevel = parseFloat(process.env.CONFIDENCE_LEVEL) || 0.6;
 
 class Bot {
+	async log(message, level) {
+		if (logLevel === 'verbose') {
+			console.log(message);
+
+			return;
+		}
+
+		if (level === 'verbose') {
+			return;
+		}
+
+		if (logLevel === 'info') {
+			console.log(message);
+
+			return;
+		}
+
+		if (level === 'info') {
+			return;
+		}
+
+		if (logLevel === 'error' && level === 'error') {
+			return;
+		}
+	}
+
 	async message(message) {
+		this.log('Bot.message', 'verbose');
+		this.log(message, 'verbose');
+
 		let data = await witClient.message(message);
 
 		return await this.doIntent(data);
 	}
-	async doIntent(data) {
-		let currentLanguage = 'nb';
 
-		console.log(data.entities);
+	async doIntent(data) {
+		this.log('Bot.doIntent', 'verbose');
+		this.log(data, 'verbose');
+
+		let currentLanguage = 'nb';
 
 		if (!data.entities || !data.entities.intent) {
 			return language[currentLanguage].missingIntent;
@@ -30,6 +62,8 @@ class Bot {
 
 		let likelyIntent = data.entities.intent[0];
 		let intentKey = likelyIntent.value;
+
+		this.log('Found intent key: ' + intentKey, 'verbose');
 
 		// Not confident enough
 		if (likelyIntent.confidence < 0.6) {
