@@ -17,6 +17,10 @@ module.exports = {
 		text: 'Jeg skjønte ikke helt hva du mente,\n ( jeg er desverre en ung "bot" :( )',
 		quick_replies: defaultQuickReplies
 	},
+	notImplementedYet: {
+		text: 'Jeg har desverre ikke lært meg dette enda!',
+		quick_replies: defaultQuickReplies
+	},
 	greet: {
 		text: 'Hei!',
 		quick_replies: defaultQuickReplies

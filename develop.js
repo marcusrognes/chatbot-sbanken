@@ -11,8 +11,13 @@ const currentBot = new Bot();
 const ask = () => {
 	rl.question('You: ', async (message) => {
 		let reply = 'Bot: ';
+		let response = await currentBot.message(message);
 
-		reply = reply + '\n' + beautify(await currentBot.message(message), null, 2, 100);
+		if (!response) {
+			return ask();
+		}
+
+		reply = reply + '\n' + beautify(response, null, 2, 100);
 
 		console.log(reply);
 

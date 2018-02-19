@@ -63,11 +63,19 @@ class Bot {
 		let likelyIntent = data.entities.intent[0];
 		let intentKey = likelyIntent.value;
 
-		this.log('Found intent key: ' + intentKey, 'verbose');
+		this.log('Found intent key: ' + intentKey + ' with confidence: ' + likelyIntent.confidence, 'verbose');
 
 		// Not confident enough
 		if (likelyIntent.confidence < 0.6) {
 			return language[currentLanguage].missingIntent;
+		}
+
+		if (intentKey === 'endStatement') {
+			return null;
+		}
+
+		if (!language[currentLanguage][intentKey]) {
+			return language[currentLanguage].notImplementedYet;
 		}
 
 		return language[currentLanguage][intentKey];
