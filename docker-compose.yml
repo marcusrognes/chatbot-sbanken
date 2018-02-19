@@ -2,9 +2,6 @@ version: '2'
 services:
   bank-chat-mongodb:
       image: mongo:latest
-      container_name: "mongodb"
-      volumes:
-        - ./data/db:/data/db
       ports:
           - 27017:27017
   bank-chat-redis:
