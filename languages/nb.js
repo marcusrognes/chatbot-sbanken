@@ -27,5 +27,13 @@ module.exports = {
 	},
 	howAreYou: {
 		text: 'Jeg har det fint!'
+	},
+	accounts: {
+		list: {
+			text: 'Dine kontoer er: {{accounts}}'
+		},
+		sum: {
+			text: 'Din samlede konto verdi er: {{sum}}'
+		}
 	}
 };

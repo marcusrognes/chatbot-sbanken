@@ -7,12 +7,30 @@ const redisClient = redis.createClient(process.env.REDIS_URL);
 const { Wit } = require('node-wit');
 const witClient = new Wit({ accessToken: process.env.WIT_TOKEN });
 
-const language = {
-	nb: require('../languages/nb.js')
-};
+const languages = require('../languages');
 
 const logLevel = process.env.LOG_LEVEL || 'verbose';
 const requiredConfidenceLevel = parseFloat(process.env.CONFIDENCE_LEVEL) || 0.6;
+
+const intents = require('../intents');
+
+/**
+ * This function returns the first top level intent
+ */
+const getTopLevelOrFirstIntent = (entities) => {
+	let topLevelIntentKeys = Object.keys(intents);
+
+	let i = 0;
+	for (i < entities.intent.length; i++; ) {
+		let currentEntity = entities.intent[i];
+
+		if (topLevelIntentKeys.indexOf(currentEntity.value) > -1) {
+			return currentEntity;
+		}
+	}
+
+	return entities.intent[0];
+};
 
 class Bot {
 	async log(message, level) {
@@ -57,28 +75,33 @@ class Bot {
 		let currentLanguage = 'nb';
 
 		if (!data.entities || !data.entities.intent) {
-			return language[currentLanguage].missingIntent;
+			return languages[currentLanguage].missingIntent;
 		}
 
-		let likelyIntent = data.entities.intent[0];
-		let intentKey = likelyIntent.value;
+		let likelyIntent = getTopLevelOrFirstIntent(data.entities);
+		let intentKeyArray = likelyIntent.value.split('.');
+		let rootIntentKey = intentKeyArray.shift();
 
-		this.log('Found intent key: ' + intentKey + ' with confidence: ' + likelyIntent.confidence, 'verbose');
+		this.log('Found intent key: ' + likelyIntent.value + ' with confidence: ' + likelyIntent.confidence, 'verbose');
 
 		// Not confident enough
-		if (likelyIntent.confidence < 0.6) {
-			return language[currentLanguage].missingIntent;
+		if (likelyIntent.confidence < requiredConfidenceLevel) {
+			return languages[currentLanguage].missingIntent;
 		}
 
-		if (intentKey === 'endStatement') {
+		if (intents[rootIntentKey]) {
+			return await intents[rootIntentKey](intentKeyArray, data);
+		}
+
+		if (rootIntentKey === 'endStatement') {
 			return null;
 		}
 
-		if (!language[currentLanguage][intentKey]) {
-			return language[currentLanguage].notImplementedYet;
+		if (!languages[currentLanguage][rootIntentKey]) {
+			return languages[currentLanguage].notImplementedYet;
 		}
 
-		return language[currentLanguage][intentKey];
+		return languages[currentLanguage][rootIntentKey];
 	}
 }
 
