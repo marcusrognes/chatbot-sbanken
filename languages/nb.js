@@ -34,6 +34,12 @@ module.exports = {
 		},
 		total: {
 			text: 'Du har totalt {{sum}}kr tilgjengelig.'
+		},
+		detailed: {
+			text: 'Konto: {{account}}\nKonto nr: {{accountNumber}}\nKonto type:{{accountType}}\nBalanse: {{balance}}kr\nTilgjengelig: {{available}}'
+		},
+		detailedMissingAccount: {
+			text: 'Jeg kjente ikke igjen kontoen'
 		}
 	}
 };
