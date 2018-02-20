@@ -1,10 +1,19 @@
 const languages = require('../languages');
+const sbanken = require('../src/clients/sbanken');
 const intentTree = {
-	async sum(keyArray, data) {
-		return languages['nb'].accounts.sum;
+	async total(keyArray, data) {
+		const accounts = await sbanken.getAccountDetails();
+
+		return {
+			text: languages['nb'].accounts.total.text.replace('{{sum}}', accounts.map(account => account.available).reduce((a, b) => a + b))
+		};
 	},
 	async list(keyArray, data) {
-		return languages['nb'].accounts.list;
+		const accounts = await sbanken.getAccountDetails();
+
+		return {
+			text: languages['nb'].accounts.list.text.replace('{{accounts}}', accounts.map(account => account.name).join(', '))
+		};
 	}
 };
 

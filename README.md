@@ -7,6 +7,8 @@ The easies way to setup this is to create a `.env` file.
 
 Example `.env` file:
 ```
+SBANKEN_APPLICATION_KEY=xxxxxxxxxxxxxxxxxxxxx
+SBANKEN_APPLICATION_SECRET=xxxxxxxxxxxxxxxxxxxxx
 WIT_APP_ID=xxxxxxx-xxxxxx-xxxxx-xxxxxxxx
 WIT_TOKEN=xxxxxxxxxxxxxxxxxxxxxxx
 REDIS_URL=redis://localhost:6379/0

@@ -12,9 +12,11 @@
 	"license": "ISC",
 	"dependencies": {
 		"body-parser": "^1.18.2",
+		"btoa": "^1.1.2",
 		"express": "^4.16.2",
 		"i18next": "^10.4.1",
 		"mongoose": "^5.0.6",
+		"node-fetch": "^2.0.0",
 		"node-wit": "^5.0.0",
 		"redis": "^2.8.0",
 		"request": "^2.83.0"

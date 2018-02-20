@@ -32,8 +32,8 @@ module.exports = {
 		list: {
 			text: 'Dine kontoer er: {{accounts}}'
 		},
-		sum: {
-			text: 'Din samlede konto verdi er: {{sum}}'
+		total: {
+			text: 'Du har totalt {{sum}}kr tilgjengelig.'
 		}
 	}
 };
