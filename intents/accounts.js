@@ -48,7 +48,7 @@ const intentTree = {
 		return {
 			text: languages['nb'].accounts.detailed.text
 				.replace('{{account}}', foundAccount.name)
-				.replace('{{accountNumber}}', foundAccount.accountNumber)
+				.replace('{{accountNumber}}', '**************')//foundAccount.accountNumber)
 				.replace('{{balance}}', foundAccount.balance)
 				.replace('{{available}}', foundAccount.available)
 				.replace('{{accountType}}', foundAccount.accountType)

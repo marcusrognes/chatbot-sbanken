@@ -19,8 +19,7 @@
 		"mongoose": "^5.0.6",
 		"node-fetch": "^2.0.0",
 		"node-wit": "^5.0.0",
-		"redis": "^2.8.0",
-		"request": "^2.83.0"
+		"redis": "^2.8.0"
 	},
 	"devDependencies": {
 		"dotenv": "^5.0.0",
