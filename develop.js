@@ -17,7 +17,9 @@ const ask = () => {
 			return ask();
 		}
 
-		reply = reply + '\n' + beautify(response, null, 2, 100);
+		//reply = reply + '\n' + beautify(response, null, 2, 100);
+		
+		reply = reply + response.text;
 
 		console.log(reply);
 

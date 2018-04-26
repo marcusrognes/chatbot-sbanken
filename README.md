@@ -26,10 +26,3 @@ With docker installed just run `docker-compose up -d`
 
 When you are done coding just run `docker-compose down` in the same folder, this will power down the docker containers.
 
-### TODO
-[ ] Add sbanken api
-[ ] Setup basic onboarding for api access
-[ ] Store user session data in redis
-[ ] Store onboarding results in mongodb (Access token?)
-[ ] Finish list accounts intent
-[ ] Add basic autoloading

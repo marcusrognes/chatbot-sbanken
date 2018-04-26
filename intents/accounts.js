@@ -43,7 +43,7 @@ const intentTree = {
 			return languages['nb'].accounts.detailedMissingAccount;
 		}
 
-		console.log(foundAccount);
+		//console.log(foundAccount);
 
 		return {
 			text: languages['nb'].accounts.detailed.text

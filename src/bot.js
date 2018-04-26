@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
-mongoose.connect(process.env.MONGO_URL);
+//mongoose.connect(process.env.MONGO_URL);
 
 const redis = require('redis');
-const redisClient = redis.createClient(process.env.REDIS_URL);
+//const redisClient = redis.createClient(process.env.REDIS_URL);
 
 const { Wit } = require('node-wit');
 const witClient = new Wit({ accessToken: process.env.WIT_TOKEN });
